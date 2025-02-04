@@ -1,9 +1,12 @@
 package com.unoesc.desafiodev;
 
 import com.unoesc.desafiodev.principal.Principal;
+import com.unoesc.desafiodev.telas.TelaLogin;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import javax.swing.*;
 
 @SpringBootApplication
 public class DesafiodevApplication implements CommandLineRunner {
@@ -14,7 +17,11 @@ public class DesafiodevApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args){
-		Principal principal = new Principal();
-		principal.executar();
+		SwingUtilities.invokeLater(() -> {
+			new TelaLogin().setVisible(true);
+		});
+
+//		Principal principal = new Principal();
+//		principal.executar();
 	}
 }
