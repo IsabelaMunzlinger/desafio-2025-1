@@ -12,6 +12,10 @@ import org.springframework.lang.NonNull;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Pessoa {
 
+    /*
+    Tabelas dos atributos
+     */
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     @Id
@@ -23,10 +27,11 @@ public class Pessoa {
     @Column
     private String nome; // Esse é o campo real que vai ser armazenado
 
+    @JsonProperty("email")
     @Column
     private String email;
 
-    //@Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true)
     @NonNull
     private String cpf;
 
@@ -41,13 +46,22 @@ public class Pessoa {
     private String usuario;
 
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Papel papel;
+
+
+    //Relacionamento com a classe Pessoaendereco
+    @OneToOne(mappedBy = "pessoa", cascade = CascadeType.ALL)
+    private PessoaEndereco pessoaEndereco;
+
     /*
     Atributos vindos da API
      */
 
 
     @JsonProperty("phone") // Mapeia o campo JSON "phone" para a variável "telefone"
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String telefone;
 
     // Método que extrai os nomes do objeto "name"
@@ -55,6 +69,10 @@ public class Pessoa {
     public void unpackName(Name name) {
         this.nome = name.getFirst() + " " + name.getLast();
     }
+
+    // public void setPessoaEndereco(PessoaEndereco endereco) {
+    // }
+
 
     // Classe interna para mapear o objeto "name"
     @JsonIgnoreProperties(ignoreUnknown = true)
@@ -70,6 +88,10 @@ public class Pessoa {
             return last;
         }
     }
+
+    /*
+    Getters e setters
+     */
 
     @JsonIgnore
     public Integer getId() {
@@ -147,83 +169,20 @@ public class Pessoa {
         this.telefone = telefone;
     }
 
+    public PessoaEndereco getPessoaEndereco() {
+        return pessoaEndereco;
+    }
 
-    //    /*
-//    Getters e setters
-//    */
-//    public void setCpf(String s) {
-//        this.cpf = s;
-//    }
-//
-//    public void setAtivo(boolean s) {
-//    }
-//
-//    public void setUsuario(String s) {
-//    }
-//
-//    public String getPhone() {
-//        return telefone;
-//    }
-//
-//    public String getCpf() {
-//        return cpf;
-//    }
-//
-//    public String getUsuario() {
-//        return getUsuario();
-//    }
-//
-//    public void setSenha(String s) {
-//        this.senha = s;
-//    }
-//
-//    public Object getSenha() {
-//        return senha;
-//    }
-//
-//
-//    // Getters e Setters
-//    public Integer getId() {
-//        return id;
-//    }
-//
-//
-//    public boolean isAtivo() {
-//        return true;
-//    }
-//
-//
-//    @JsonIgnore
-//    public void setId(Integer id) {
-//        this.id = id;
-//    }
-//
-//    public String getNome() {
-//        return nome;
-//    }
-//
-//    public void setNome(String nome) {
-//        this.nome = nome;
-//    }
-//
-//    public String getEmail() {
-//        return email;
-//    }
-//
-//    public void setEmail(String email) {
-//        this.email = email;
-//    }
-//
-//
-//
-//
-//
-//    @JsonIgnore
-//    public String getTelefone() {
-//        return telefone;
-//    }
-//
-//    public void setTelefone(String telefone) {
-//        this.telefone = telefone;
-//    }
+    public void setPessoaEndereco(PessoaEndereco pessoaEndereco) {
+        this.pessoaEndereco = pessoaEndereco;
+    }
+    
+
+    public Papel getPapel() {
+        return papel;
+    }
+
+    public void setPapel(Papel papel) {
+        this.papel = papel;
+    }
 }

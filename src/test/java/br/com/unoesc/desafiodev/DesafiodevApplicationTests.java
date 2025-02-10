@@ -1,4 +1,4 @@
-package com.unoesc.desafiodev;
+package br.com.unoesc.desafiodev;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

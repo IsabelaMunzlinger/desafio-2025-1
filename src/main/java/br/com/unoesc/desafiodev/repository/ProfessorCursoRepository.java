@@ -7,12 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-// @Repository
-// public interface ProfessorCursoRepository extends JpaRepository<ProfessorCurso, Integer> {
-//     List<ProfessorCurso> findByProfessor(Pessoa professor);
-//     List<ProfessorCurso> findByCurso(Curso curso);
-// }
-
 @Repository
 public interface ProfessorCursoRepository extends JpaRepository<ProfessorCurso, Integer> {
     

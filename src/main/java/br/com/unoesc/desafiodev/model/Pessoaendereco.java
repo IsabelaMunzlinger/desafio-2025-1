@@ -6,7 +6,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "pessoaendereco", schema = "desafio")
-public class Pessoaendereco {
+public class PessoaEndereco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -28,6 +28,11 @@ public class Pessoaendereco {
 
     @Column(name = "numero", nullable = false)
     private Integer numero;
+
+
+    /*
+    Getters e setters
+     */
 
     public Integer getId() {
         return id;

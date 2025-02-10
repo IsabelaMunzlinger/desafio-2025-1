@@ -97,7 +97,7 @@ public class PessoaService {
             System.out.println("Ativo: " + (pessoa.isAtivo() ? "Sim" : "Não"));
             System.out.println("Usuário: " + pessoa.getUsuario());
         } else {
-            System.out.println("❌ Erro ao criar pessoa.");
+            System.out.println(" Erro ao criar pessoa.");
         }
     }
 

@@ -1,6 +1,7 @@
 package br.com.unoesc.desafiodev.model;
 
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "curso", schema = "desafio")
@@ -16,12 +17,24 @@ public class Curso {
     @Column(name = "assunto")
     private String assunto;
 
-    @Column(name = "encontros", nullable = false)
-    private Integer encontros;
-
     @Lob
     @Column(name = "situacao", nullable = false)
     private String situacao;
+
+    @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Encontro> encontros;
+
+    @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<EstudanteCurso> estudantecurso;
+
+    @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProfessorCurso> professorecurso;
+
+    public Curso() {
+    }
+
+
+    // Getters e Setters
 
     public Integer getId() {
         return id;
@@ -47,14 +60,6 @@ public class Curso {
         this.assunto = assunto;
     }
 
-    public Integer getEncontros() {
-        return encontros;
-    }
-
-    public void setEncontros(Integer encontros) {
-        this.encontros = encontros;
-    }
-
     public String getSituacao() {
         return situacao;
     }
@@ -63,4 +68,28 @@ public class Curso {
         this.situacao = situacao;
     }
 
+
+    public List<Encontro> getEncontros() {
+        return encontros;
+    }
+
+    public void setEncontros(List<Encontro> encontros) {
+        this.encontros = encontros;
+    }
+
+    public List<EstudanteCurso> getEstudantecurso() {
+        return estudantecurso;
+    }
+
+    public void setEstudantecurso(List<EstudanteCurso> estudantecurso) {
+        this.estudantecurso = estudantecurso;
+    }
+
+    public List<ProfessorCurso> getProfessorecurso() {
+        return professorecurso;
+    }
+
+    public void setProfessorecurso(List<ProfessorCurso> professorecurso) {
+        this.professorecurso = professorecurso;
+    }
 }

@@ -6,7 +6,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "estudantecurso", schema = "desafio")
-public class Estudantecurso {
+public class EstudanteCurso {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -16,6 +16,12 @@ public class Estudantecurso {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "curso_id", nullable = false)
     private Curso curso;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "estudante_id", referencedColumnName = "id", nullable = false)
+    private Pessoa estudante;
+
+    //private Pessoa pessoa;
 
     public Integer getId() {
         return id;
@@ -33,4 +39,11 @@ public class Estudantecurso {
         this.curso = curso;
     }
 
+    public Pessoa getEstudante() {
+        return estudante;
+    }
+
+    public void setEstudante(Pessoa estudante) {
+        this.estudante = estudante;
+    }
 }

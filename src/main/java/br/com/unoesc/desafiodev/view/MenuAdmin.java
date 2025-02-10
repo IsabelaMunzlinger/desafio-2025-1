@@ -24,6 +24,7 @@ public class MenuAdmin {
         this.cursoService = cursoService;
     }
 
+    // Método para exibir o menu do administrador
     public void exibirMenu() {
         int opcao;
         do {
@@ -44,67 +45,63 @@ public class MenuAdmin {
             switch (opcao) {
                 case 1:
                     Pessoa pessoa = pessoaService.getDadosPessoa();
-                    //Pessoa pessoaEndereco = pessoaEnderecoService.solicitarEndereco(pessoa);
                     if (pessoa != null) {
-                        pessoaService.solicitarDadosManuais(pessoa);
+                        pessoaService.solicitarDadosManuais(pessoa); // Método da classe service para solicitar dados
                         System.out.println("*** Informações de endereço:\n ***");
-                        pessoaEnderecoService.solicitarEndereco(pessoa);
+                        pessoaEnderecoService.solicitarEndereco(pessoa); // Método da classe service para solicitar
+                                                                         // endereço
                     } else {
-                        System.out.println("❌ Não foi possível gerar os dados.");
+                        System.out.println(" Não foi possível gerar os dados.");
                     }
                     break;
 
-
-                    case 2:
+                case 2:
                     System.out.println("\n ***Editar Pessoa ***");
 
-                    System.out.print("Digite o ID da pessoa para editar: ");
+                    System.out.print("Digite o ID da pessoa para editar: "); // Se baseia no ID da pessoa para editar
                     Integer idEditar = leitura.nextInt();
-                    leitura.nextLine(); 
+                    leitura.nextLine();
 
+                    // Busca a pessoa pelo ID, caso exista, Optional atribuir valor diferente de
+                    // null à optionalPessoaEditar
                     Optional<Pessoa> optionalPessoaEditar = pessoaService.buscarPessoaPorId(idEditar);
 
                     if (optionalPessoaEditar.isPresent()) {
-                        Pessoa pessoaEditar = optionalPessoaEditar.get();
-
-                    pessoaService.editarPessoa(idEditar);
-
-                    // System.out.println("Deseja editar o endereço? (S/N)");
-                    // String resposta = leitura.nextLine().trim().toUpperCase();
-
-                //     if (resposta.equals("S")) {
-                //         pessoaEnderecoService.editarEndereco(pessoaEditar);
-                //     }
-                // } else {
-                //     System.out.println("Pessoa não encontrada.");
-                // }
+                        pessoaService.editarPessoa(idEditar);
+                    } else {
+                        System.out.println("Pessoa não encontrada.");
+                    }
                     break;
 
-                    case 3:
+                case 3:
                     System.out.println("\n ***Excluir Pessoa ***");
                     System.out.print("Digite o ID da pessoa para excluir: ");
                     Integer idExcluir = leitura.nextInt();
                     pessoaService.excluirPessoa(idExcluir);
                     break;
 
-                    case 4:
+                case 4:
                     System.out.println("\n ***Listar Pessoas ***");
                     pessoaService.listarPessoas();
-                    List<Pessoa> pessoas = pessoaService.listarPessoas();
+                    List<Pessoa> pessoas = pessoaService.listarPessoas(); // método da classe service para listar
+                                                                          // pessoas
+                    // Itera por todas as pessoas e exibe o ID e o nome
                     for (Pessoa p : pessoas) {
                         System.out.println("ID: " + p.getId() + ", Nome: " + p.getNome());
                     }
                     break;
 
+                // Cases 5, 6, 7 e 8 são referentes a cursos
+
                 case 5:
                     System.out.println("\n ***Criar Curso ***");
-                    cursoService.criarCurso();
+                    cursoService.criarCurso(); // Método da classe service para criar curso
                     break;
 
                 case 6:
                     System.out.println("\n ***Editar Curso ***");
                     System.out.print("Digite o ID do curso para editar: ");
-                    idEditar = leitura.nextInt(); // Agora está correto
+                    idEditar = leitura.nextInt(); // Se baseia no ID do curso para editar
                     cursoService.editarCurso(idEditar);
                     break;
 
@@ -124,7 +121,6 @@ public class MenuAdmin {
                     }
                     break;
 
-
                 case 0:
                     System.out.println("Saindo do menu...");
                     break;
@@ -132,8 +128,6 @@ public class MenuAdmin {
                     System.out.println("Opção inválida! Tente novamente.");
             }
         } while (opcao != 0);
-        
-    }
-}
 
+    }
 }
