@@ -1,9 +1,12 @@
 package br.com.unoesc.desafiodev.service;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import br.com.unoesc.desafiodev.model.Pessoa;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
+@Service
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ResultadoAPI {
     private List<Pessoa> results;
