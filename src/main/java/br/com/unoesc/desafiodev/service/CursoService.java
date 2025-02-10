@@ -38,8 +38,6 @@ public class CursoService {
     }
 
     public List<Curso> solicitarCursosDisponiveis() {
-        // Crie uma lista de cursos simulados, ou recupere da base de dados
-        //List<Curso> cursosDisponiveis = new ArrayList<>();
 
         return cursoRepository.findBySituacao("ATIVO");
     }
